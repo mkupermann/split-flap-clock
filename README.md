@@ -75,7 +75,7 @@ node tools/check-render.js  # Windows + Chrome: renders screenshots headless and
 
 ## License
 
-[MIT](LICENSE.md) © 2026 Michael Kupermann
+[Apache License 2.0](LICENSE.md) © 2026 Michael Kupermann
 
 ---
 
