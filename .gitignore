@@ -1,0 +1,9 @@
+.claude/
+.mimocode/
+.playwright-mcp/
+.wwebjs_cache/
+node_modules/
+FallblattUhr.scr
+config.js
+*.log
+*.log.1

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Split-Flap Clock</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="stage" aria-label="Fallblattanzeige"></canvas>
+  <pre id="flap-debug" hidden></pre>
+  <div class="webgl-error" id="webgl-error" hidden>WebGL nicht verfügbar</div>
+  <div class="hint" id="hint">S Sound AUS · G Standuhr AN · F Vollbild · T Timer · R Reset · Leertaste Stoppuhr</div>
+
+  <script src="config.js"></script>
+  <script src="vendor/three.min.js"></script>
+  <script src="render3d.js"></script>
+  <script src="sound.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

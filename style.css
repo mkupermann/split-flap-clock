@@ -1,0 +1,84 @@
+/* 3D-Fallblattuhr (Three.js) — Vollbild-Canvas, Hintergrund, Hinweistext */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #0b0b0d;
+  color: #f4f1e8;
+  font-family: 'Oswald', 'Roboto Condensed', 'Arial Narrow', 'Segoe UI', sans-serif;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body.hide-cursor {
+  cursor: none;
+}
+
+body.screensaver {
+  cursor: none;
+}
+
+/* Vollbild-Canvas */
+#stage {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  z-index: 0;
+  outline: none;
+}
+
+/* WebGL nicht verfügbar */
+.webgl-error {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  font-size: clamp(18px, 3vw, 32px);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #f4f1e8;
+  background: #0b0b0d;
+}
+
+.webgl-error[hidden] {
+  display: none;
+}
+
+/* Hinweisleiste: unter der Tastenreihe im freien Rand, keine Überlappung */
+.hint {
+  position: fixed;
+  bottom: clamp(4px, 1vh, 12px);
+  right: clamp(12px, 2vw, 28px);
+  z-index: 5;
+  font-size: clamp(9px, 0.9vw, 12px);
+  letter-spacing: 0.14em;
+  color: rgba(220, 216, 204, 0.38);
+  text-transform: uppercase;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+  white-space: nowrap;
+}
+
+body.hide-cursor .hint {
+  opacity: 0;
+}
+
+body.screensaver .hint {
+  display: none;
+}

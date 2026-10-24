@@ -1,0 +1,10 @@
+{
+  "name": "split-flap-clock",
+  "version": "1.0.0",
+  "description": "Fullscreen 3D split-flap clock for the browser (WebGL)",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  }
+}
