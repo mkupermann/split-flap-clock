@@ -345,9 +345,16 @@ function parseMode(search) {
 // Browser-DOM + FlapRenderer (3D)
 // ---------------------------------------------------------------------------
 if (typeof document !== 'undefined') {
+  // Bildschirmschoner-Modus vor resolveConfig/buildRenderLayout ermitteln (einmalig).
+  // Ist er aktiv, gilt clockConfig.messenger = false: keine signal/whatsapp-Zeilen,
+  // loadMessenger/renderMessenger bleiben stumm.
+  const isScreensaver = parseMode(window.location.search) === 'screensaver';
   const clockConfig = resolveConfig(
     typeof window !== 'undefined' ? window.CLOCK_CONFIG : undefined
   );
+  if (isScreensaver) {
+    clockConfig.messenger = false;
+  }
   const WEATHER_URL = weatherUrl(clockConfig.city);
   const WEATHER_REFRESH_MS = 10 * 60 * 1000;
   const TIMER_KEY = 'flap.timer';
@@ -361,7 +368,6 @@ if (typeof document !== 'undefined') {
   let soundOn = false;
   let chimeOn = true;
   let audioCtx = null;
-  let isScreensaver = false;
   let statusTimer = null;
 
   // ---- localStorage (jeder Zugriff in try/catch) ----
@@ -877,7 +883,7 @@ if (typeof document !== 'undefined') {
   }
 
   function init() {
-    isScreensaver = parseMode(window.location.search) === 'screensaver';
+    // isScreensaver ist bereits oben ermittelt (einzige Berechnung)
     if (isScreensaver) {
       document.body.classList.add('screensaver');
       document.body.classList.add('hide-cursor');

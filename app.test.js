@@ -421,6 +421,22 @@ test('SS-AK3: app.js init mit screensaver-Option, setText timer/stopwatch im Scr
   assert.match(src, /startClock\(\)/);
 });
 
+// --- Screensaver: kein Messenger (auch wenn config.js messenger: true setzt) ---
+
+test('SS-MSG1: Messenger-Abschaltung im Screensaver wirkt vor buildRenderLayout(clockConfig)', () => {
+  const src = fs.readFileSync(path.join(__dirname, 'app.js'), 'utf8');
+  // Reihenfolge im DOM-Block: isScreensaver ermitteln -> resolveConfig ->
+  // messenger=false -> buildRenderLayout(clockConfig)
+  assert.match(
+    src,
+    /parseMode\(window\.location\.search\) === 'screensaver'[\s\S]*?const clockConfig = resolveConfig\([\s\S]*?if \(isScreensaver\) \{\s*clockConfig\.messenger = false;\s*\}[\s\S]*?buildRenderLayout\(clockConfig\)/,
+    'messenger=false (Screensaver) vor buildRenderLayout(clockConfig), isScreensaver vor resolveConfig'
+  );
+  // isScreensaver wird genau einmal berechnet (keine zweite, widersprüchliche Berechnung in init)
+  const modeCalls = src.match(/parseMode\(window\.location\.search\)/g) || [];
+  assert.strictEqual(modeCalls.length, 1, 'parseMode(window.location.search) genau einmal im Quelltext');
+});
+
 // --- Optionale Konfiguration: resolveConfig / buildRenderLayout / weatherUrl ---
 
 // AK 1: resolveConfig
